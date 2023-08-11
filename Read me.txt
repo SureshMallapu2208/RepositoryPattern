@@ -1,28 +1,36 @@
 
 Step 1:	Add below Nuget packages 
 
-<PackageReference Include="Hangfire" Version="1.8.4" />
-<PackageReference Include="Hangfire.Core" Version="1.8.4" />
-<PackageReference Include="Hangfire.SqlServer" Version="1.8.4" />
-<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
 
 
-Step 2: Create Database and Table 
+Step 2: Create 'Mphasis' Database and Table 
 
-Below is the table script
-CREATE TABLE PILOT(
-Id int identity(1,1)
-,Name nvarchar(100)
-,FlyingExperience int 
-,Status int
-,CreatedDate datetime
-)
+USE [Mphasis]
+GO
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Users](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [varchar](50) NULL,
+	[Email] [varchar](50) NULL,
+	[PhoneNumber] [varchar](10) NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
 
 Step 3: Open the uploaded code and make sure build should succeed
 
-Step 4: Insert records through Swagger and url https://localhost:7298/swagger/index.html
-
-Step 5: While running the application access https://localhost:7298/hangfire
-We can see the Hangfire dashboard.
-
-Step 6: Check the console to see the background jobs
+Step 4: CRUD operations through Swagger and url https://localhost:7091/swagger/index.html
